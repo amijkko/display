@@ -1,0 +1,5 @@
+<h1>hi there</h1>
+
+<form action="{% url 'display' %}" method="POST">{% csrf_token %}
+    <input type="submit" value="Send Email">
+</form>
