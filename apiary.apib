@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://dolphinBI/
 
 # BitcoinApi
 
@@ -8,7 +8,10 @@ Api for manipulating blockchainData
 ## Get transaction [/transaction{?id}]
 
 ### Get transaction by ID [GET]
-Получаем трнзакцию по ее ID(скорее всего уже из Postgres базы)
+Получаем транзакцию по ее ID(скорее всего уже из Postgres базы)
+Параметры : ID - int 
+                    
+
 
 + Response 200 (application/json)
 
@@ -109,6 +112,62 @@ Api for manipulating blockchainData
                             }
                         
                         
+                        
+                        ]    
+                    }, 
+                ]
+            }
+            
+            
+## Get adress_transactions [/adress_transactions{?id}]
+
+### get_adress_transactions [GET]     
+
+
+Получаем только список всех транзакций по адрессу 
+
+
++ Response 200 (application/json)
+
+ 
+
+    + Body
+
+            {
+                "transactions": [
+                    {
+                        "double_spend": "False",
+                        "time": 1414984334,
+                        "relayed_by": "5.199.133.88",
+                        "hash": "df458e747e1560b6222d3cfbb37ec48a796cf1b772adf31c4ed481e8906f57a3",
+                        "tx_index":68299195,
+                        "version": 1,
+                        "size":225
+                        "inputs" : [    
+                            {
+                            "n" : int,
+                            "value" : int,
+                            "address" : str,
+                            "tx_index" : int,
+                            "type" : int,
+                            "script" : str,
+                            "script_sig" : str,
+                            "sequence" : int
+                            }
+                        
+                            ]
+                        "outputs" : [
+                            {
+                            "n" : int
+                            "value" : int
+                            "address" : str
+                            "tx_index" : int
+                            "script" : str
+                            "spent" : bool
+                            
+                            
+                            
+                            }
                         
                         ]    
                     }, 
