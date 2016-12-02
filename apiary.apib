@@ -3,78 +3,114 @@ HOST: http://polls.apiblueprint.org/
 
 # BitcoinApi
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Api for manipulating blockchainData
 
-## Questions Collection [/questions]
+## Get transaction [/transaction{?id}]
 
-### List All Questions [GET]
+### Get transaction by ID [GET]
+Получаем трнзакцию по ее ID(скорее всего уже из Postgres базы)
 
 + Response 200 (application/json)
 
         [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+           {
+                "txid": "6f13e4413401a76fc4d23b4515b6f2ae09e4f7901746eaa58f25e87c2d6f2276",
+                "hash": "6f13e4413401a76fc4d23b4515b6f2ae09e4f7901746eaa58f25e87c2d6f2276",
+                "size": 191,
+                "vsize": 191,
+                "version": 1,
+                "locktime": 0,
+                "vin": [
+                  {
+                    "txid": "59f91960f0be424cdd912f04ea3e3ce3ce08176858c8c0ac20bd93aa96244187",
+                    "vout": 0,
+                    "scriptSig": {
+                    "asm": "304402205c8a58dfbc9bb83a399a9a5d8df4256eb1768191de2ba2d2223ee1375e0f749f022027b2107e339af74651343092be0accbb33cec933ddc39f3093a076e2e8ee88e0[ALL] 02c9b3e9f0308e685ead9c413b2a38581bbc669c605850f5061a23d16f6ffac57e",
+                    "hex": "47304402205c8a58dfbc9bb83a399a9a5d8df4256eb1768191de2ba2d2223ee1375e0f749f022027b2107e339af74651343092be0accbb33cec933ddc39f3093a076e2e8ee88e0012102c9b3e9f0308e685ead9c413b2a38581bbc669c605850f5061a23d16f6ffac57e"
+                 },
+                 "sequence": 4294967295
             }
+        ],
+        "vout": [
+         {
+            "value": 0.19940000,
+            "n": 0,
+            "scriptPubKey": {
+            "asm": "OP_DUP OP_HASH160 5579fc23ef0d18c052a289034cf2cd735bc4d86d OP_EQUALVERIFY OP_CHECKSIG",
+            "hex": "76a9145579fc23ef0d18c052a289034cf2cd735bc4d86d88ac",
+            "reqSigs": 1,
+            "type": "pubkeyhash",
+            "addresses": [
+                "18nxZy4o6h6j4SkBoeuSYkAjNVGA6McR98"
+        ]
+             }
+         }
+                    ]
+                }
+
         ]
 
-### Create a New Question [POST]
+## Get adress [/adress{?id}]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### get_adress [GET]
 
-+ Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
 
-+ Response 201 (application/json)
+Получаем по id адресс и его транзакции
 
-    + Headers
 
-            Location: /questions/2
+
++ Response 200 (application/json)
+
+ 
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+                "hash160": "b44370a1e57f7754507df560b8e06eeed2d0a76a",
+                "address": "1HS9RLmKvJ7D1ZYgfPExJZQZA1DMU3DEVd",
+                "n_tx": 262,
+                "total_received":1406390754,
+                "total_sent":1405480754,
+                "final_balance":910000,
+                "transactions": [
                     {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
+                        "double_spend": "False",
+                        "time": 1414984334,
+                        "relayed_by": "5.199.133.88",
+                        "hash": "df458e747e1560b6222d3cfbb37ec48a796cf1b772adf31c4ed481e8906f57a3",
+                        "tx_index":68299195,
+                        "version": 1,
+                        "size":225
+                        "inputs" : [    
+                            {
+                            "n" : int,
+                            "value" : int,
+                            "address" : str,
+                            "tx_index" : int,
+                            "type" : int,
+                            "script" : str,
+                            "script_sig" : str,
+                            "sequence" : int
+                            }
+                        
+                            ]
+                        "outputs" : [
+                            {
+                            "n" : int
+                            "value" : int
+                            "address" : str
+                            "tx_index" : int
+                            "script" : str
+                            "spent" : bool
+                            
+                            
+                            
+                            }
+                        
+                        
+                        
+                        ]    
+                    }, 
                 ]
             }
